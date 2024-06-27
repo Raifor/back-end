@@ -98,6 +98,24 @@ public class VetController {
         return ResponseEntity.ok(mapper.toListDto(pacienteList));
     }
 
+    @GetMapping(path = "listarPorSituacao/{situacao}")
+    @Operation(description = "lista todos os pacientes por situação", responses = {
+            @ApiResponse(responseCode = "200", description = "Listagem geral por situação",
+                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            array = @ArraySchema())),
+    })
+    public ResponseEntity<List<PacienteDto>> listarPorSituacao(@PathVariable SituacaoAnimal situacao){
+
+        List<Paciente> pacienteList = new ArrayList<>();
+        try {
+            pacienteList = service.listByStatus(situacao);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(400).build();
+        }
+        return ResponseEntity.ok(mapper.toListDto(pacienteList));
+    }
+
     @GetMapping(path = "/{id}")
     @Operation(description = "End point para obter dados de paciente", responses = {
             @ApiResponse(responseCode = "200", description = "buscar",

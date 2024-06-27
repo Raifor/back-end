@@ -11,6 +11,8 @@ public interface PacienteService {
     Paciente update(Paciente dado);
     Paciente getById(Long id);
 
+    List<Paciente> listByStatus(SituacaoAnimal situacaoAnimal);
+
     void remove(Long id);
 
     void updateStatus(Long id, SituacaoAnimal situacaoAnimal);

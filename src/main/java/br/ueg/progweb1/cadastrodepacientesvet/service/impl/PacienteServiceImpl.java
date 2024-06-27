@@ -65,6 +65,11 @@ public class PacienteServiceImpl implements PacienteService {
     }
 
     @Override
+    public List<Paciente> listByStatus(SituacaoAnimal situacaoAnimal) {
+        return repository.findAllByStatusPet(situacaoAnimal);
+    }
+
+    @Override
     public void remove(Long id) {
         var dataDB = validateIdPacienteExists(id);
         repository.delete(dataDB);
